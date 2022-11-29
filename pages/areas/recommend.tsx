@@ -9,6 +9,8 @@ const RecommendAreas = () => {
 
   const input = router.query.input
 
+  // ボタン押下前の処理
+  // 検索フォームを出力する
   if (!input) {
     return (
       <>
@@ -17,11 +19,15 @@ const RecommendAreas = () => {
     )
   }
 
+  // ボタン押下後の処理
   const { data, error } = useSWR(`https://api.github.com/repos/${input}`, fetcher)
 
+  // エラー結果を出力する
   if (error) return <>failed to load</>
+  // 処理中の間 "loading..." を表示する
   if (!data) return <>loading...</>
 
+  // 検索結果を出力する
   return (
     <>
       <pre>
